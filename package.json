@@ -73,6 +73,9 @@
       ],
       "no-use-before-define": [
         "off"
+      ],
+      "wc/guard-super-call": [
+        "off"
       ]
     }
   },
