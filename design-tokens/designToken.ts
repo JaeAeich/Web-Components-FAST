@@ -1,30 +1,22 @@
 import { colors } from './colors/colors.js';
 import { spacing } from './spacing/spacing.js';
+import { DesignTokenItem, DesignTokens } from './designTokenInterface.js';
 
-const styles: Record<string, string> = {};
-
-interface DesignTokenItem {
-  value: string;
-  description: string;
-  type: string;
-}
-
-interface DesignTokens {
-  colors: Record<string, DesignTokenItem>;
-  spacing: Record<string, DesignTokenItem>;
-}
+const tokens: Record<string, string> = {};
 
 const designTokens: DesignTokens = {
   colors: colors.colors,
   spacing: spacing.spacing,
 };
 
-for (const [category, tokens] of Object.entries(designTokens)) {
+for (const [category, token] of Object.entries(designTokens)) {
   for (const [tokenName, tokenValue] of Object.entries<DesignTokenItem>(
-    tokens
+    token
   )) {
-    styles[`${category}-${tokenName}`] = tokenValue.value;
+    tokens[`${category}-${tokenName}`] = tokenValue.value;
   }
 }
-console.log(styles);
-export { designTokens, styles };
+
+console.log(tokens);
+
+export { tokens };

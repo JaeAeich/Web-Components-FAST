@@ -6,18 +6,24 @@ import {
   observable,
   attr
 } from '@microsoft/fast-element';
-import { designTokens } from '../../design-tokens/designToken.js';
+import { DesignToken } from '@microsoft/fast-foundation';
+import { tokens } from '../../design-tokens/designToken.js';
 
 const template = html<MyDesignTokenComponent>`
-  <div class="header">Design tokens</div>
+  <div class="container">
+    <div class="header">Design Tokens</div>
+    <div class="body">I have Deafult styling defined by Design Tokens. :)</div>
+    <div class="flex abs">Untested Styled</div>
+  </div>
 `;
 
 const styles = css`
   :host {
-    display: grid;
+    display:block;
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
     padding: 20px;
+    background-color:var(--colors-color-primary)
   }
   .header {
     grid-column: 1 / -1;
@@ -35,13 +41,22 @@ const styles = css`
 export class MyDesignTokenComponent extends FASTElement {
   @attr jsonData: string = '{}';
 
-  @observable parsedJsonData : any= {};
-  
+  @observable parsedJsonData?: any = tokens;
+
   @observable tokens: any = {};
 
   connectedCallback() {
     super.connectedCallback();
-    this.tokens = designTokens;
-    console.log(this.tokens);
+    this.parsedJsonData = JSON.parse(this.jsonData);
+  }
+
+  parsedJsonDataChanged() {
+    const currentComponent = this.$fastController.element;
+    if (this.parsedJsonData) {
+      Object.entries(this.parsedJsonData).forEach(([key, value]) => {
+        const newToken = DesignToken.create<string>(key);
+        newToken.setValueFor(currentComponent, value as string);
+      });
+    }
   }
 }
