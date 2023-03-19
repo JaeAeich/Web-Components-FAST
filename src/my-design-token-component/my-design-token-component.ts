@@ -11,25 +11,50 @@ import { tokens } from '../../design-tokens/designToken.js';
 
 const template = html<MyDesignTokenComponent>`
   <div class="container">
-    <div class="header">Design Tokens</div>
-    <div class="body">I have Deafult styling defined by Design Tokens. :)</div>
-    <div class="flex abs">Untested Styled</div>
+    <div class="container__header">Design Tokens Example</div>
+    <div class="container__body">
+      This component uses design tokens for styling.
+      ${x=>x.sentence}
+    </div>
+    <div class="container__footer">
+      <small>Defined by: <code>@my-design-system/tokens</code></small>
+    </div>
+    <div class="flex abs">Styled Untested</div>
   </div>
 `;
 
 const styles = css`
-  :host {
-    display:block;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-    padding: 20px;
-    background-color:var(--colors-color-primary)
+  .container {
+    background-color: var(--colors-color-secondary);
+    border: 1px solid var(--colors-color-primary);
+    padding: 1rem;
+    position: relative;
   }
-  .header {
-    grid-column: 1 / -1;
-    font-size: 2rem;
+
+  .container__header {
+    font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 20px;
+    color: var(--colors-color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .container__body {
+    color: var(--colors-color-primary);
+  }
+
+  .container__footer {
+    font-size: 0.8rem;
+    color: var(--colors-color-secondary);
+    margin-top: 1rem;
+  }
+  .flex {
+    display: flex;
+  }
+  .abs {
+    position: absolute;
+    bottom: 0;
+    right: 1rem;
+    gap: 1rem;
   }
 `;
 
@@ -40,6 +65,9 @@ const styles = css`
 })
 export class MyDesignTokenComponent extends FASTElement {
   @attr jsonData: string = '{}';
+
+  @attr sentence: string =
+    'NO other style have been passed to me so I am using default styles ;)';
 
   @observable parsedJsonData?: any = tokens;
 
