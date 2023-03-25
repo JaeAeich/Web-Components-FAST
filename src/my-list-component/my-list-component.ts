@@ -26,7 +26,9 @@ const dataTemplate = html`
     <!-- <div class="abs">Styled Tested</div> -->
   </div>
 `;
-const loadingTemplate = html` <div>Loading ...</div> `;
+const loadingTemplate = html`
+  <div class="spinner-container"><div class="spinner"></div></div>
+`;
 
 const template = html<MyListComponent>`
   <div class="container">
@@ -50,15 +52,15 @@ const styles = css`
     position: relative;
   }
 
-  .list-container{
-    display: flex;  
+  .list-container {
+    display: flex;
     flex-direction: column;
     background-color: var(--colors-color-secondary);
     padding: var(--spacing-spacing-medium);
     border-radius: var(--borderRadii-border-radius-large);
     box-shadow: var(--shadows-shadow-medium);
     position: relative;
-    padding-bottom:var(--spacing-spacing-large)
+    padding-bottom: var(--spacing-spacing-large);
   }
 
   ul {
@@ -97,27 +99,32 @@ const styles = css`
     font-size: 0.9rem;
   }
 
-  .data-list .status {
-    color: var(--colors-color-success);
-    font-size: 0.9rem;
-  }
-
-  .data-list .status.inactive {
-    color: var(--colors-color-warning);
-  }
-
-  .data-list .status.suspended {
-    color: var(--colors-color-error);
-  }
-
-  .data-list .status:not(.active) {
-    font-weight: bold;
-  }
-
   .abs {
     position: absolute;
     bottom: 0;
     right: 1rem;
+  }
+
+  .spinner-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 5px solid #ccc;
+    border-top-color: #333;
+    animation: spinner 0.8s infinite linear;
+  }
+
+  @keyframes spinner {
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;
 
