@@ -15,7 +15,7 @@ const template = html<MyItTestedComponent>`
     <button class="btn" @click="${x => x.increment()}">+</button>
     <span>${x => x.count}</span>
     <button class="btn" @click="${x => x.decrement()}">-</button>
-    <div class="flex abs">Styled Tested:Integration</div>
+    <div class="flex abs">Styled Tested:Integration,Unit</div>
   </div>
 `;
 
