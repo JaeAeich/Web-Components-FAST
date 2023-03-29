@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable lit-a11y/click-events-have-key-events */
 import {
   repeat,
   customElement,
@@ -19,10 +21,16 @@ const dataTemplate = html`
           <li>
             <div class="name">${x => x.firstname} ${x => x.lastname}</div>
             <div class="email">${x => x.email}</div>
+
           </li>
         `
       )}
     </ul>
+    ${x => {
+      if (x.clicked) {
+        return loadingTemplate;
+      }
+    }}
     <!-- <div class="abs">Styled Tested</div> -->
   </div>
 `;
@@ -39,6 +47,9 @@ const template = html<MyListComponent>`
       }
       return loadingTemplate;
     }}
+    <div class="footer">
+        <div class="next" @click=${x => x.handleNext()}>More</div>
+    </div>
   </div>
 `;
 
@@ -50,6 +61,12 @@ const styles = css`
     box-shadow: var(--shadows-shadow-small);
     justify-content: center;
     position: relative;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .list-container {
@@ -121,6 +138,28 @@ const styles = css`
     animation: spinner 0.8s infinite linear;
   }
 
+  .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+    background-color: var(--colors-color-secondary);
+  }
+
+  .next {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: var(--borderRadii-border-radius-medium);
+    background-color: var(--colors-color-primary);
+    color: var(--colors-color-secondary);
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .next:hover {
+    background-color: var(--colors-color-accent);
+  }
+
   @keyframes spinner {
     to {
       transform: rotate(360deg);
@@ -136,6 +175,8 @@ const styles = css`
 export class MyListComponent extends FASTElement {
   @observable ready: boolean = false;
 
+  @observable clicked: boolean = false;
+
   @attr jsonData: string = '{}';
 
   @attr quantity: number = 10;
@@ -147,7 +188,7 @@ export class MyListComponent extends FASTElement {
   @observable
   api: string = `https://fakerapi.it/api/v1/persons?_quantity=${this.quantity}`;
 
-  @observable apiData: any = {};
+  @observable apiData: any = [];
 
   async connectedCallback() {
     super.connectedCallback();
@@ -158,15 +199,21 @@ export class MyListComponent extends FASTElement {
   async fetchData() {
     const response = await fetch(this.api);
     const data = await response.json();
-    this.apiData = data.data;
+    this.apiData = [...this.apiData, ...data.data];
     this.ready = true;
+    this.clicked = false;
   }
 
   apiDataChanged() {
     if (this.apiData.size === 0) {
       this.ready = false;
     }
-    console.log(this.apiData);
+    // console.log(this.apiData);
+  }
+
+  handleNext() {
+    this.clicked = true;
+    this.fetchData();
   }
 
   parsedJsonDataChanged() {
