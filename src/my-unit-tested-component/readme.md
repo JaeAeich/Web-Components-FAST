@@ -3,7 +3,7 @@
 ## Preview
 ![Default](/assets/unit-default.png)
 
-This module exports a custom element named `my-design-token-component` that uses design tokens for styling. It also imports the `DesignToken`  from `@microsoft/fast-foundation` and tokens from `../../design-tokens/designToken.js`.
+This module exports a custom element named `my-unit-tested-component` that uses design tokens for styling. It also imports the `DesignToken`  from `@microsoft/fast-foundation` and tokens from `../../design-tokens/designToken.js`.
 
 This component demostrates simple data binding through an input box where the use can input their name and have it visible on the screen.
 
