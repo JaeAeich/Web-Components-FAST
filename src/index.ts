@@ -3,6 +3,7 @@ import { MyDesignTokenComponent } from './my-design-token-component/my-design-to
 import { MyUnitTestedComponent } from './my-unit-tested-component/my-unit-tested-component.js';
 import { MyItTestedComponent } from './my-it-tested-component/my-it-tested-component.js';
 import { MyListComponent } from './my-list-component/my-list-component.js';
+import { MyComponentWrapper } from './my-component-wrapper/my-component-wrapper.js';
 
 export {
   MyUntestedComponent,
@@ -10,4 +11,5 @@ export {
   MyUnitTestedComponent,
   MyItTestedComponent,
   MyListComponent,
+  MyComponentWrapper,
 };

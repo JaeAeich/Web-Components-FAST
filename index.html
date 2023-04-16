@@ -21,11 +21,13 @@
 
 <body>
   <my-untested-component></my-untested-component>
-  <my-design-token-component ></my-design-token-component>
   <my-design-token-component jsonData='{"colors-color-primary":"#36454F","colors-color-secondary":"#F0E68C"}' sentence="I am different as I was passed different styles :o"></my-design-token-component>
   <my-unit-tested-component></my-unit-tested-component>
   <my-it-tested-component></my-it-tested-component>
   <my-list-component></my-list-component>
+  <my-component-wrapper jsonData='{"colors-color-primary":"#36454F","colors-color-secondary":"#F0E68C"}' >
+    <my-design-token-component  sentence="I am inside the wrapper :O" ></my-design-token-component>
+  </my-component-wrapper>
   <script type="module" src="./out-tsc/src/index.js"></script>
 </body>
 </html>
