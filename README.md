@@ -1,3 +1,59 @@
+## For users 
+
+# [jae-fast-component](https://www.npmjs.com/package/jae-fast-element)
+
+Jae Fast Component is a suite of web components built on Fast, which utilizes design tokens to make styling easy and scalable. It is cross-platform, and can be used in React, Angular, or vanilla projects.
+
+## Installation
+
+You can install this package using npm:
+
+```
+npm i jae-fast-component
+```
+
+
+## Usage
+
+### Vanilla HTML
+
+```html
+<my-design-token-component sentence="I am inside the wrapper :O">
+</my-design-token-component>
+<script type="module" src="./node_modules/my-jae-element"></script>
+```
+
+### React/JS projects
+```js
+import 'jae-fast-element';
+
+function App() {
+  return (
+    <div className="App">
+      <my-untested-component></my-untested-component>
+      <my-design-token-component
+        jsonData='{"colors-color-primary":"red","colors-color-secondary":"red"}'
+        sentence="I am different as I was passed different styles :o"
+      ></my-design-token-component>
+    </div>
+  );
+}
+
+export default App;
+```
+### Ts projects
+
+For TypeScript projects, you'll have to use a React wrapper and wrap the component first before using it. For more details, please refer to the [documentation](https://www.fast.design/docs/integrations/react/) or visit this example [repository](https://github.com/JaeAeich/Ts-demo).
+
+## Demo
+
+[HTML demo](https://github.com/JaeAeich/HTML-example)\
+[Js demo](https://github.com/JaeAeich/Js-demo)\
+[Ts demo](https://github.com/JaeAeich/Ts-demo)
+
+
+
+## For developers
 ## Open-wc Starter App
 
 [![Built with open-wc recommendations](https://img.shields.io/badge/built%20with-open--wc-blue.svg)](https://github.com/open-wc)
